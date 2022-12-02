@@ -46,7 +46,7 @@ class TestConfig():
 		src_pos = np.array([r*np.cos(azimuth), r*np.sin(azimuth), 0.0])
 		return src_pos
 
-	def gen_circular_motion_pos(self):
+	def gen_circular_motion_pos(self, scenario="src_moving"):
 		"""
 		Circular motion: Non Overlaping Source Trajectory and noise
 		Allowed Source angular motion: [10 - 180] degrees
@@ -61,21 +61,42 @@ class TestConfig():
 		MIN_SRC_NOI_DIST = 5
 
 		src_mic_dist = self.src_mic_dist.getValue()
+		noi_mic_dist = self.noi_mic_dist.getValue()
 
-		# Generate random theta on cirle
-		src_start_theta = self.theta_grid.getValue()
-		src_end_theta = src_start_theta + np.radians(MIN_SRC_MOV) + random.random()* np.radians((MAX_SRC_MOV - MIN_SRC_MOV) )    # Min src movement in terms of angle : 10 degrees
-		delta_src_movement = np.degrees(np.abs(src_end_theta - src_start_theta))
-		noise_theta = src_end_theta + np.radians(MIN_SRC_NOI_DIST) + random.random()* np.radians((360 - delta_src_movement - MIN_SRC_NOI_DIST*2 ))    # Min src to noise dist in terms of angle : 5 degrees
+		if "source_moving"==scenario: 
+			# Generate random theta on cirle
+			src_start_theta = self.theta_grid.getValue()
+			src_end_theta = src_start_theta + np.radians(MIN_SRC_MOV) + random.random()* np.radians((MAX_SRC_MOV - MIN_SRC_MOV) )    # Min src movement in terms of angle : 10 degrees
+			delta_src_movement = np.degrees(np.abs(src_end_theta - src_start_theta))
+			noise_theta = src_end_theta + np.radians(MIN_SRC_NOI_DIST) + random.random()* np.radians((360 - delta_src_movement - MIN_SRC_NOI_DIST*2 ))    # Min src to noise dist in terms of angle : 5 degrees
 
-		#print(f"src_start: {np.degrees(src_start_theta) % 360}, src_end: {np.degrees(src_end_theta) % 360}, noise: {np.degrees(noise_theta) % 360}")
+			#print(f"src_start: {np.degrees(src_start_theta) % 360}, src_end: {np.degrees(src_end_theta) % 360}, noise: {np.degrees(noise_theta) % 360}")
 
-		noise_pos = self.get_pos(src_mic_dist, noise_theta)
+			noise_pos = self.get_pos(noi_mic_dist, noise_theta)
 
-		src_theta_traj = np.linspace(src_start_theta, src_end_theta, self.nb_points)
-		src_pos = np.array( [ self.get_pos(src_mic_dist, theta) for theta in src_theta_traj ] )	
+			src_theta_traj = np.linspace(src_start_theta, src_end_theta, self.nb_points)
+			src_pos = np.array( [ self.get_pos(src_mic_dist, theta) for theta in src_theta_traj ] )	
 
-		noise_pos = np.expand_dims(noise_pos, axis=0)
+			noise_pos = np.expand_dims(noise_pos, axis=0)
+
+		elif "noise_moving"==scenario:
+			# Generate random theta on cirle
+			noi_start_theta = self.theta_grid.getValue()
+			noi_end_theta = noi_start_theta + np.radians(MIN_SRC_MOV) + random.random()* np.radians((MAX_SRC_MOV - MIN_SRC_MOV) )    # Min src movement in terms of angle : 10 degrees
+			delta_src_movement = np.degrees(np.abs(noi_end_theta - noi_start_theta))
+			src_theta = noi_end_theta + np.radians(MIN_SRC_NOI_DIST) + random.random()* np.radians((360 - delta_src_movement - MIN_SRC_NOI_DIST*2 ))    # Min src to noise dist in terms of angle : 5 degrees
+
+			#print(f"src_start: {np.degrees(src_start_theta) % 360}, src_end: {np.degrees(src_end_theta) % 360}, noise: {np.degrees(noise_theta) % 360}")
+
+			src_pos = self.get_pos(src_mic_dist, src_theta)
+
+			noi_theta_traj = np.linspace(noi_start_theta, noi_end_theta, self.nb_points)
+			noise_pos = np.array( [ self.get_pos(noi_mic_dist, theta) for theta in noi_theta_traj ] )	
+
+			src_pos = np.expand_dims(src_pos, axis=0)
+		else:
+			pass
+
 
 		return src_pos, noise_pos
 
@@ -91,9 +112,8 @@ class TestConfig():
 
 		src_mic_dist = self.src_mic_dist.getValue()
 		noi_mic_dist = self.noi_mic_dist.getValue()
-
+	
 		# Generate random theta on cirle
-
 		src_theta = self.theta_grid.getValue()
 		noi_theta = src_theta + np.radians(MIN_SRC_NOI_DIST) + np.radians(random.random()*(360 - MIN_SRC_NOI_DIST*2))    # Min src to noise dist in terms of angle : 5 degrees
 		
@@ -185,7 +205,7 @@ class TestConfig():
 		return src_pos, noise_pos
 	"""
 
-	def _create_acoustic_scene_config(self, scene_type):
+	def _create_acoustic_scene_config(self, scene_type, scenario=None):
 
 		# Room
 		room_sz = self.room_size.getValue()
@@ -202,7 +222,9 @@ class TestConfig():
 			src_pos, noise_pos = self.gen_static_scene_on_circle_pos()
 
 		elif "CircularMotion" == scene_type:
-			src_pos, noise_pos = self.gen_circular_motion_pos()
+
+			src_pos, noise_pos = self.gen_circular_motion_pos(scenario)
+
 		else:
 			print("Needs to be Implemented \n")
 
@@ -284,18 +306,28 @@ if __name__=="__main__":
 									)
 
 	snr = 5
-	t60 = 1.0
-	test_config = TestConfig(array_setup=array_setup_10cm_2mic, test_snr=snr, test_t60=t60, static_prob=0.0, src_mic_dist = 1.0, non_linear_prob=0.0, nb_points=16, same_plane=True)
+	t60 = 0.4
+	src_mic_dist = 2.0
+	noi_mic_dist = 1.0
+	scenario = "source_moving"
+	test_config = TestConfig(array_setup=array_setup_10cm_2mic, test_snr=snr, test_t60=t60, static_prob=0.0, src_mic_dist = src_mic_dist, noi_mic_dist = noi_mic_dist, non_linear_prob=0.0, nb_points=16, same_plane=True)
 
 	for idx in range(0, 21):									
-	
-		static_config_dict = test_config._create_acoustic_scene_config("Static")
-		circular_motion_config_dict = test_config._create_acoustic_scene_config("CircularMotion")
+		retry_flag = True
+		retry_count = 0
+		while(retry_flag):
+			try:
+				static_config_dict = test_config._create_acoustic_scene_config("Static")
+				circular_motion_config_dict = test_config._create_acoustic_scene_config("CircularMotion", scenario)
+				retry_flag = False
+			except AssertionError:
+				retry_flag = True
+				retry_count += 1
 
 		#breakpoint()
-		pp_str = f'./configs/snr_{snr}_t60_{t60}/'
+		pp_str = f'./configs/{scenario}/snr_{snr}_t60_{t60}/src_mic_dist_{src_mic_dist}_noi_mic_dist_{noi_mic_dist}/'
 		torch.save(circular_motion_config_dict, f'{pp_str}config_circular_motion_{idx}.pt')
 		torch.save(static_config_dict, f'{pp_str}config_static_circular_{idx}.pt')
-		print("Successful Execution \n")
+		print(f"Successful Execution {idx}\n")
 
 

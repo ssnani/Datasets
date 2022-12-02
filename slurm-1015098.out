@@ -1,0 +1,130 @@
+job started ....
+# world_size's: 16, rank: 12
+Distributed Dataset Size: 37
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+# world_size's: 16, rank: 15
+Distributed Dataset Size: 37
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+# world_size's: 16, rank: 6
+Distributed Dataset Size: 37
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+# world_size's: 16, rank: 2
+Distributed Dataset Size: 37
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+# world_size's: 16, rank: 3
+Distributed Dataset Size: 37
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+# world_size's: 16, rank: 5
+Distributed Dataset Size: 37
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+# world_size's: 16, rank: 14
+Distributed Dataset Size: 37
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+# world_size's: 16, rank: 7
+Distributed Dataset Size: 37
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+# world_size's: 16, rank: 4
+Distributed Dataset Size: 37
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+# world_size's: 16, rank: 11
+Distributed Dataset Size: 37
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+# world_size's: 16, rank: 1
+Distributed Dataset Size: 37
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+# world_size's: 16, rank: 10
+Distributed Dataset Size: 37
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+# world_size's: 16, rank: 0
+Distributed Dataset Size: 37
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+# world_size's: 16, rank: 13
+Distributed Dataset Size: 37
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+# world_size's: 16, rank: 8
+Distributed Dataset Size: 37
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+# world_size's: 16, rank: 9
+Distributed Dataset Size: 37
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+gpub046.delta.internal.ncsa.edu, sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+job finished!

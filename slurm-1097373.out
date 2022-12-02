@@ -1,0 +1,18 @@
+job started ....
+Traceback (most recent call last):
+  File "/u/battula12/Projects/Datasets/StaticType_MovingSourceDataset.py", line 192, in <module>
+    for _batch_idx, val in enumerate(train_loader):
+  File "/u/battula12/.conda/envs/moving_source/lib/python3.9/site-packages/torch/utils/data/dataloader.py", line 681, in __next__
+    data = self._next_data()
+  File "/u/battula12/.conda/envs/moving_source/lib/python3.9/site-packages/torch/utils/data/dataloader.py", line 721, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+  File "/u/battula12/.conda/envs/moving_source/lib/python3.9/site-packages/torch/utils/data/_utils/fetch.py", line 52, in fetch
+    return self.collate_fn(data)
+  File "/u/battula12/.conda/envs/moving_source/lib/python3.9/site-packages/torch/utils/data/_utils/collate.py", line 175, in default_collate
+    return [default_collate(samples) for samples in transposed]  # Backwards compatibility.
+  File "/u/battula12/.conda/envs/moving_source/lib/python3.9/site-packages/torch/utils/data/_utils/collate.py", line 175, in <listcomp>
+    return [default_collate(samples) for samples in transposed]  # Backwards compatibility.
+  File "/u/battula12/.conda/envs/moving_source/lib/python3.9/site-packages/torch/utils/data/_utils/collate.py", line 141, in default_collate
+    return torch.stack(batch, 0, out=out)
+RuntimeError: stack expects each tensor to be equal size, but got [11, 4, 399, 161] at entry 0 and [8, 4, 399, 161] at entry 1
+job finished!

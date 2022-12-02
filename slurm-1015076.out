@@ -1,0 +1,50 @@
+job started ....
+# world_size's: 6, rank: 5
+Distributed Dataset Size: 98
+sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+# world_size's: 6, rank: 2
+Distributed Dataset Size: 98
+sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+# world_size's: 6, rank: 3
+Distributed Dataset Size: 98
+sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+# world_size's: 6, rank: 4
+Distributed Dataset Size: 98
+sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+# world_size's: 6, rank: 0
+Distributed Dataset Size: 98
+sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+# world_size's: 6, rank: 1
+Distributed Dataset Size: 98
+sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+sig: torch.Size([6, 15, 320000]), torch.float64, cpu
+job finished!

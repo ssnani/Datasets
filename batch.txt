@@ -1,0 +1,13 @@
+#!/bin/sh 
+#SBATCH --job-name=GPURIR
+#SBATCH --nodes=1 --ntasks-per-node=4 --partition=gpuA40x4
+#SBATCH --gpus-per-node=4
+#SBATCH --constraint="scratch"
+#SBATCH --mem=220gb
+#SBATCH --time=0:10:00
+#SBATCH --account=bbje-delta-gpu
+echo "job started ...."
+cd /u/battula12/Projects/Datasets
+#srun -n 2 python distributed_dataloader.py
+python StaticType_MovingSourceDataset.py
+echo "job finished!"

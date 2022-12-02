@@ -1,0 +1,14 @@
+job started ....
+LibriSpeech: 585, train_ds: 61425
+_batch_idx: 0, inp_shape: torch.Size([8, 15, 320000]), inp_dtype: torch.float64, tgt_shape: torch.Size([8, 15, 320000]), tgt_dtype: torch.float64, doA: torch.Size([8, 320000, 2]), doA_dtype: torch.float64
+_batch_idx: 1, inp_shape: torch.Size([8, 15, 320000]), inp_dtype: torch.float64, tgt_shape: torch.Size([8, 15, 320000]), tgt_dtype: torch.float64, doA: torch.Size([8, 320000, 2]), doA_dtype: torch.float64
+_batch_idx: 2, inp_shape: torch.Size([8, 15, 320000]), inp_dtype: torch.float64, tgt_shape: torch.Size([8, 15, 320000]), tgt_dtype: torch.float64, doA: torch.Size([8, 320000, 2]), doA_dtype: torch.float64
+_batch_idx: 3, inp_shape: torch.Size([8, 15, 320000]), inp_dtype: torch.float64, tgt_shape: torch.Size([8, 15, 320000]), tgt_dtype: torch.float64, doA: torch.Size([8, 320000, 2]), doA_dtype: torch.float64
+_batch_idx: 4, inp_shape: torch.Size([8, 15, 320000]), inp_dtype: torch.float64, tgt_shape: torch.Size([8, 15, 320000]), tgt_dtype: torch.float64, doA: torch.Size([8, 320000, 2]), doA_dtype: torch.float64
+_batch_idx: 5, inp_shape: torch.Size([8, 15, 320000]), inp_dtype: torch.float64, tgt_shape: torch.Size([8, 15, 320000]), tgt_dtype: torch.float64, doA: torch.Size([8, 320000, 2]), doA_dtype: torch.float64
+_batch_idx: 6, inp_shape: torch.Size([8, 15, 320000]), inp_dtype: torch.float64, tgt_shape: torch.Size([8, 15, 320000]), tgt_dtype: torch.float64, doA: torch.Size([8, 320000, 2]), doA_dtype: torch.float64
+_batch_idx: 7, inp_shape: torch.Size([8, 15, 320000]), inp_dtype: torch.float64, tgt_shape: torch.Size([8, 15, 320000]), tgt_dtype: torch.float64, doA: torch.Size([8, 320000, 2]), doA_dtype: torch.float64
+_batch_idx: 8, inp_shape: torch.Size([8, 15, 320000]), inp_dtype: torch.float64, tgt_shape: torch.Size([8, 15, 320000]), tgt_dtype: torch.float64, doA: torch.Size([8, 320000, 2]), doA_dtype: torch.float64
+_batch_idx: 9, inp_shape: torch.Size([8, 15, 320000]), inp_dtype: torch.float64, tgt_shape: torch.Size([8, 15, 320000]), tgt_dtype: torch.float64, doA: torch.Size([8, 320000, 2]), doA_dtype: torch.float64
+_batch_idx: 10, inp_shape: torch.Size([8, 15, 320000]), inp_dtype: torch.float64, tgt_shape: torch.Size([8, 15, 320000]), tgt_dtype: torch.float64, doA: torch.Size([8, 320000, 2]), doA_dtype: torch.float64
+job finished!

@@ -149,8 +149,10 @@ class MovingSourceDataset(Dataset):
 		dbg_print(f'sph: {sph_len}, noi: {noi_len}')
 
 		mic_pos = cfg['mic_pos']
-
 		array_pos = np.mean(mic_pos, axis=0)
+		beta = gpuRIR.beta_SabineEstimation(cfg['room_sz'], cfg['t60'], cfg['abs_weights'])
+
+		"""
 		self.nb_points = cfg['src_traj_pts'].shape[0]
 		traj_pts = cfg['src_traj_pts']
 		
@@ -162,11 +164,20 @@ class MovingSourceDataset(Dataset):
 		noise_pos = cfg['noise_pos']
 		noise_pos = np.expand_dims(noise_pos, axis=0) if noise_pos.shape[0] != 1 else noise_pos
 
-		noise_traj_pts = np.ones((self.nb_points,1)) * noise_pos
+		noise_traj_pts = np.ones((self.nb_points,1)) * noise_pos if noise_pos.shape[0] == 1 else noise_pos
+		"""
+		
+		src_traj_pts = cfg['src_traj_pts']
+		noise_pos = cfg['noise_pos']
+		noise_pos = np.expand_dims(noise_pos, axis=0) if len(noise_pos.shape) == 1 else noise_pos
+		noise_traj_pts = noise_pos
 
-		beta = gpuRIR.beta_SabineEstimation(cfg['room_sz'], cfg['t60'], cfg['abs_weights'])
+		src_timestamps, t, src_trajectory = self.get_timestamps(src_traj_pts, sph_len)
+		noise_timestamps, t, noise_trajectory = self.get_timestamps(noise_traj_pts, sph_len)
 
-		dbg_print(f'src: {traj_pts}, noise: {noise_pos}\n')
+	
+		dbg_print(f'src: {src_traj_pts}, noise: {noise_pos}\n')
+		#breakpoint()
 
 		acoustic_scene = AcousticScene(
 			room_sz = cfg['room_sz'],
@@ -180,14 +191,16 @@ class MovingSourceDataset(Dataset):
 			fs = self.fs,
 			t = t,
 			traj_pts = cfg['src_traj_pts'],
-			timestamps = timestamps,
-			trajectory = trajectory,
-			DOA = cart2sph(trajectory - array_pos), #[:,1:3], 
+			timestamps = src_timestamps,
+			trajectory = src_trajectory,
+			DOA = cart2sph(src_trajectory - array_pos), #[:,1:3], 
 			noise_pos = noise_pos,
-			noise_traj_pts = noise_traj_pts    
+			noise_traj_pts = noise_traj_pts,
+			noise_timestamps = noise_timestamps
 		)
 
-		mic_signals, dp_signals, noise_reverb = acoustic_scene.simulate()
+		
+		mic_signals, dp_signals, noise_reverb = acoustic_scene.simulate_scenario()   #acoustic_scene.simulate()
 
 		mic_signals = torch.from_numpy(mic_signals.T)
 		dp_signals = torch.from_numpy(dp_signals.T)
@@ -202,9 +215,20 @@ class MovingSourceDataset(Dataset):
 		return mic_signals, dp_signals, acoustic_scene.DOA    #, noise_reverb - for debug only
 		
 
+	def get_timestamps(self, traj_pts, sig_len):
+		nb_points = traj_pts.shape[0]
+		
+		# Interpolate trajectory points
+		timestamps = np.arange(nb_points) * sig_len / self.fs / nb_points
+		t = np.arange(sig_len)/self.fs
+		trajectory = np.array([np.interp(t, timestamps, traj_pts[:,i]) for i in range(3)]).transpose()
+
+		return timestamps, t, trajectory
 
 if __name__=="__main__":
-	dataset_file = 'dataset_file_circular_motion.txt' # 'dataset_file_10sec.txt'
+	snr = 5
+	t60 = 0.2
+	dataset_file = f'dataset_file_circular_motion_snr_{snr}_t60_{t60}.txt' # 'dataset_file_10sec.txt'
 	train_dataset = MovingSourceDataset(dataset_file, array_setup_10cm_2mic, size =1, transforms=None) #NetworkInput_Seg(320, 160, 64000, 16000))
 	#breakpoint()
 	train_loader = DataLoader(train_dataset, batch_size = 1, num_workers=0)

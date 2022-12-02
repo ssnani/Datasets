@@ -1,0 +1,7 @@
+job started ....
+torch.Size([236240])
+torch.Size([2, 236240])
+torch.Size([2, 236240])
+mix_sig: torch.Size([1, 11, 4, 399, 161]), torch.float32, cpu 		        tgt_sig: torch.Size([1, 11, 2, 399, 161]), torch.float32, cpu 				doa: torch.Size([1, 11, 399, 2]), torch.float32, cpu 
+
+job finished!

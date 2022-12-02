@@ -1,0 +1,18 @@
+job started ....
+# gpu's: 2, rank: 1
+Distributed Dataset Size: 293
+sig: torch.Size([6, 320000]), torch.float64, cpu
+sig: torch.Size([6, 320000]), torch.float64, cpu
+sig: torch.Size([6, 320000]), torch.float64, cpu
+sig: torch.Size([6, 320000]), torch.float64, cpu
+sig: torch.Size([6, 320000]), torch.float64, cpu
+sig: torch.Size([6, 320000]), torch.float64, cpu
+# gpu's: 2, rank: 0
+Distributed Dataset Size: 293
+sig: torch.Size([6, 320000]), torch.float64, cpu
+sig: torch.Size([6, 320000]), torch.float64, cpu
+sig: torch.Size([6, 320000]), torch.float64, cpu
+sig: torch.Size([6, 320000]), torch.float64, cpu
+sig: torch.Size([6, 320000]), torch.float64, cpu
+sig: torch.Size([6, 320000]), torch.float64, cpu
+job finished!

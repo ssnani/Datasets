@@ -24,7 +24,7 @@ class AcousticScene:
 	It can also store the results from the DOA estimation.
 	"""
 	def __init__(self, room_sz, T60, beta, SNR, array_setup, mic_pos, source_signal, noise_signal, fs, traj_pts, timestamps,
-				 trajectory, t, DOA, noise_pos, noise_traj_pts):
+				 trajectory, t, DOA, noise_pos, noise_traj_pts, noise_timestamps=None):
 		self.room_sz = room_sz				# Room size
 		self.T60 = T60						# Reverberation time of the simulated room
 		self.beta = beta					# Reflection coefficients of the walls of the room (make sure it corresponds with T60)
@@ -41,6 +41,7 @@ class AcousticScene:
 		self.DOA = DOA 						# Continuous DOA
 		self.noise_pos = noise_pos          # Currently Static noise
 		self.noise_traj_pts = noise_traj_pts
+		self.noise_timestamps = noise_timestamps
 		self._point_source_noise = True
 		self.need_direct_path_signals = True
 
@@ -126,8 +127,6 @@ class AcousticScene:
 		#torchaudio.save("scaled_noisy_reverb.wav", torch.from_numpy(noise_reverb * scale_noi).T.to(torch.float32), 16000)
 		return mic_signals, dp_signals, noise_reverb
 
-	
-
 	def static_simulate(self):
 		# Speech Enhancement
 		if self.T60 == 0:
@@ -154,6 +153,71 @@ class AcousticScene:
 
 		return src_reverb, dp_src_signal, noise_reverb
 
+	def simulate_source(self, signal, signal_traj_pts, timestamps):
+		"""
+			Computes reverb and direct path signals for a given signal
+			signal_traj_pts: [nb_points, 3]
+		"""
+		if self.T60 == 0:
+			Tdiff = 0.1
+			Tmax = 0.1
+			nb_img = [1,1,1]
+		else:
+			Tdiff = gpuRIR.att2t_SabineEstimator(12, self.T60) # Use ISM until the RIRs decay 12dB
+			Tmax = gpuRIR.att2t_SabineEstimator(40, self.T60)  # Use diffuse model until the RIRs decay 40dB
+			if self.T60 < 0.15: Tdiff = Tmax # Avoid issues with too short RIRs
+			nb_img = gpuRIR.t2n( Tdiff, self.room_sz )
+
+		nb_mics  = len(self.mic_pos)
+
+		nb_traj_pts = len(signal_traj_pts)
+		nb_gpu_calls = min(int(np.ceil( self.fs * Tdiff * nb_mics * nb_traj_pts * np.prod(nb_img) / 1e9 )), nb_traj_pts)
+		traj_pts_batch = np.ceil( nb_traj_pts / nb_gpu_calls * np.arange(0, nb_gpu_calls+1) ).astype(int)
+
+		RIRs_list = [	gpuRIR.simulateRIR(self.room_sz, self.beta,
+						 	signal_traj_pts[traj_pts_batch[i]:traj_pts_batch[i+1],:], self.mic_pos,
+						 	nb_img, Tmax, self.fs, Tdiff=Tdiff,
+						 	orV_rcv=self.array_setup.mic_orV, mic_pattern=self.array_setup.mic_pattern) for i in range(0,nb_gpu_calls) ]
+
+		RIRs = np.concatenate(RIRs_list, axis=0)
+
+		reverb_signals = gpuRIR.simulateTrajectory(signal, RIRs, timestamps=timestamps, fs=self.fs)
+		reverb_signals = reverb_signals[0:len(self.t),:]
+
+
+		dp_RIRs = gpuRIR.simulateRIR(self.room_sz, self.beta, signal_traj_pts, self.mic_pos, [1,1,1], 0.1, self.fs,
+									orV_rcv=self.array_setup.mic_orV, mic_pattern=self.array_setup.mic_pattern)
+		dp_signals = gpuRIR.simulateTrajectory(signal, dp_RIRs, timestamps=timestamps, fs=self.fs)
+		dp_signals = dp_signals[:reverb_signals.shape[0],:]
+
+		return reverb_signals, dp_signals
+
+	def simulate_scenario(self):
+		""" 
+		Get the array recording using gpuRIR to perform the acoustic simulations.
+		"""
+		msg = f"SNR: {self.SNR}, t60: {self.T60}"
+		dbg_print(msg)
+		mic_signals, dp_signals = self.simulate_source(self.source_signal, self.traj_pts, self.timestamps)
+		noise_reverb, _ = self.simulate_source(self.noise_signal, self.noise_traj_pts, self.noise_timestamps)
+		
+
+		scale_noi = np.sqrt(np.sum(mic_signals[:,0]**2) / (np.sum(noise_reverb[:,0]**2) * (10**(self.SNR/10))))
+		mic_signals = mic_signals + noise_reverb * scale_noi
+
+		# normalize the root mean square of the mixture to a constant
+		sph_len = mic_signals.shape[0]#*mic_signals.shape[1]          #All mics
+
+		c = 1.0 * np.sqrt(sph_len / (np.sum(mic_signals[:,0]**2) + 1e-8))
+
+		mic_signals *= c
+		dp_signals *= c
+
+		#torchaudio.save("scaled_noisy_reverb.wav", torch.from_numpy(noise_reverb * scale_noi).T.to(torch.float32), 16000)
+		return mic_signals, dp_signals, noise_reverb
+
+
+
 	def adjust_to_snr(self, mic_signals, dp_signals, noise_reverb):
 		scale_noi = np.sqrt(np.sum(mic_signals[:,0]**2) / (np.sum(noise_reverb[:,0]**2) * (10**(self.SNR/10))))
 		mic_signals = mic_signals + noise_reverb * scale_noi
@@ -167,8 +231,6 @@ class AcousticScene:
 		dp_signals *= c
 
 		return mic_signals, dp_signals
-
-
 
 	def get_rmsae(self, exclude_silences=False):
 		""" Returns the Root Mean Square Angular Error (degrees) of the DOA estimation.
