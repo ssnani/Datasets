@@ -75,6 +75,7 @@ class AcousticScene:
 						 	nb_img, Tmax, self.fs, Tdiff=Tdiff,
 						 	orV_rcv=self.array_setup.mic_orV, mic_pattern=self.array_setup.mic_pattern) ]
 		RIRs = np.concatenate(RIRs_list, axis=0)
+		breakpoint()
 		mic_signals = gpuRIR.simulateTrajectory(self.source_signal, RIRs, timestamps=self.timestamps, fs=self.fs)
 		mic_signals = mic_signals[0:len(self.t),:]
 

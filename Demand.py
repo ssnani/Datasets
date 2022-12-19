@@ -23,7 +23,10 @@ class DemandNoiseDataset(Dataset):
 		self.T = T
 
 		self.req_samples = self.T*self.fs
-		self.transform = torchaudio.transforms.Resample(new_freq = fs)
+		self.transform = torchaudio.transforms.Resample(new_freq = fs, lowpass_filter_width=64,
+    												rolloff=0.9475937167399596,
+    												resampling_method="kaiser_window",
+    												beta=14.769656459379492)
 
 	def __len__(self):
 		return len(self.noise_list)
@@ -33,8 +36,11 @@ class DemandNoiseDataset(Dataset):
 		noise, fs = torchaudio.load(self.noise_list[idx])
 		#Currently supported for 16k
 		if 16000!=fs:
+			
 			self.transform.orig_freq = fs
-			noise = self.transform(noise)
+			#noise = self.transform(noise)
+
+			noise = torchaudio.functional.resample(noise,fs, self.fs)
 
 		noise_len = noise.shape[1]
 		if  noise_len < self.req_samples:
@@ -51,15 +57,15 @@ class DemandNoiseDataset(Dataset):
 
 if __name__=="__main__":
 	path = "/scratch/bbje/battula12/Databases/DEMAND"
-	dataset = DemandNoiseDataset(path, T=20, fs=16000, _is_train=True)
+	dataset = DemandNoiseDataset(path, T=20, fs=16000, _is_train=False)
 	data_loader = DataLoader(dataset, batch_size = 1, num_workers=0)
 
 	for _batch_idx, val in enumerate(data_loader):
 		print(f"noise: {val[0].shape}, {val[0].dtype}, {val[0].device}")
-		torchaudio.save('noise.wav', val[0], 16000)
-		breakpoint()
-		if _batch_idx==0:
-			break
+		#torchaudio.save('noise.wav', val[0], 16000)
+		#breakpoint()
+		#if _batch_idx==0:
+			#break
 		
 
 

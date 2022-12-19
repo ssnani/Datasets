@@ -401,7 +401,7 @@ if __name__=="__main__":
 	#print(f"inp_shape: {mic_signals.shape}, tgt_shape: {dp_signals.shape}")
 	
 
-	train_loader = DataLoader(train_dataset, batch_size = 8, num_workers=0)
+	train_loader = DataLoader(train_dataset, batch_size = 1, num_workers=0)
 
 	for _batch_idx, val in enumerate(train_loader):
 		print(f"_batch_idx: {_batch_idx}, inp_shape: {val[0].shape}, inp_dtype: {val[0].dtype}, tgt_shape: {val[1].shape}, tgt_dtype: {val[1].dtype}, doA: {val[2].shape}, doA_dtype: {val[2].dtype}")

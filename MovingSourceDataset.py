@@ -146,7 +146,7 @@ class MovingSourceConfigDataset(Dataset):
 
 
 if __name__=="__main__":
-	libri_path = '/scratch/bbje/battula12/Databases/LibriSpeech/LibriSpeech/train-clean-100'
+	libri_path = '/scratch/bbje/battula12/Databases/LibriSpeech/LibriSpeech/test-clean' #train-clean-100' dev-clean
 	noise_path = "/scratch/bbje/battula12/Databases/DEMAND"
 	ArraySetup = namedtuple('ArraySetup', 'arrayType, orV, mic_pos, mic_orV, mic_pattern')
 	array_setup_10cm_2mic = ArraySetup(arrayType='planar', 
@@ -158,8 +158,8 @@ if __name__=="__main__":
 	mic_pattern = 'omni'
 )
 
-	dataset = MovingSourceConfigDataset(libri_path, 'flac', noise_path, True, array_setup_10cm_2mic)
-
+	dataset = MovingSourceConfigDataset(libri_path, 'flac', noise_path, False, array_setup_10cm_2mic)
+	"""
 	for idx in range(len(dataset)):
 		print(f"processing {idx}")
 		config_dict = dataset._create_random_acoustic_scene()
@@ -179,17 +179,18 @@ if __name__=="__main__":
 		torch.save(config_dict, f'/scratch/bbje/battula12/Databases/SourceTrajectories/config_dict_{idx}.pt')
 	#breakpoint()
 	"""
-	with open('dataset_file.txt', 'w') as f:
+	
+	with open('test_dataset_file.txt', 'w') as f:
 		for idx in range(len(dataset)):
 			print(f"processing {idx}")
 			#config_dict = dataset._create_random_acoustic_scene()
 			#torch.save(config_dict, f'/scratch/bbje/battula12/Databases/SourceTrajectories/config_dict_{idx}.pt')
 			noise_idx = random.randint(0, len(dataset.noise_file_list)-1)
-			msg = f"{dataset.sph_file_list[idx]}, {dataset.noise_file_list[noise_idx]}, {f'/scratch/bbje/battula12/Databases/SourceTrajectories/config_dict_{idx}.pt'}\n"
+			msg = f"{dataset.sph_file_list[idx]}, {dataset.noise_file_list[noise_idx]}, {f'/scratch/bbje/battula12/Databases/SourceTrajectories/config_circular_motion_{idx}.pt'}\n"
 			f.write(msg)
 			#break
 
-	"""
+	
 		
 
 
